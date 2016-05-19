@@ -210,7 +210,12 @@ function update() {
     if(player.y >= height - player.height){
       player.y = height - player.height;
       player.jumping = false;
-    }
+
+      if(player.y <= height){
+        //respawns the player at the top
+        player.y = 0;
+      }
+    }    
 
     if(player.y < 0) player.y = 0;
 
@@ -243,6 +248,11 @@ function render() {
         player.velY = 0;
     }
 
+    if(player.y === 100){
+      context.font = "30px Arial";
+      context.fillText("GAME OVER", 330, 500);
+    }
+
     context.fillStyle = 'orange';
     context.fillRect(player.x, player.y, player.width, player.height);
     context.fillStyle = 'blue';
@@ -268,6 +278,9 @@ function collision(first, second) {
             first.y  > second.y + second.height ||
             first.y + first.height < second.y);
 }
+
+//executes the game func
+//var startGame = window.setInterval(game, 1000/60);
 
 setInterval(function () {
     game();
