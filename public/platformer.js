@@ -1,114 +1,11 @@
 var canvas = document.getElementById('canvas');
 var context = document.getElementById('canvas').getContext('2d');
 
-// GAME MENU
- var gameMenu = document.getElementById('game-menu');
- document.getElementById('play').addEventListener('click', hideMenu);
- /*
- function hideMenu() {
-   if(gameMenu.style.display === "block"){
-     gameMenu.style.display = "none";
-     game();
-   }
- }*/
- function hideMenu(){
-  gameMenu.style.display = "none"; //tempo solution to get rid of game-menu
- }
-// GAME MENU END
-
 var keys = [];
 
 var width = 1024, height = 640, speed = 4;
 
 var score = 0;
-
-var currentMap = 0;
-var map = [];
-var currentMapStage = 0;
-var stage1 = [];
-var stage2 = [];
-var stage2 = [];
-
-map = [
-    stage1 = [
-        {
-            x: 40,
-            y: 300,
-            width: 250,
-            height: 30
-        },
-        {
-            x: 400,
-            y: 325,
-            width: 100,
-            height: 40
-        },
-        {
-            x: 650,
-            y: 275,
-            width: 100,
-            height: 40
-        },
-        {
-            x: 900,
-            y: 275,
-            width: 100,
-            height: 40
-        }
-    ],
-    stage2 = [
-        {
-            x: 0,
-            y: 275,
-            width: 100,
-            height: 40
-        },
-        {
-            x: 120,
-            y: 250,
-            width: 40,
-            height: 40
-        },
-        {
-            x: 300,
-            y: 350,
-            width: 40,
-            height: 40
-        },
-        {
-            x: 450,
-            y: 450,
-            width: 40,
-            height: 40
-        },
-        {
-            x: 625,
-            y: 400,
-            width: 350,
-            height: 40
-        }
-    ],
-    stage3 = [
-        {
-            x: 0,
-            y: 500,
-            width: 300,
-            height: 40
-        },
-        {
-            x: 375,
-            y: 400,
-            width: 50,
-            height: 40
-        },
-        {
-            x: 400,
-            y: 300,
-            width: 500,
-            height: 40
-        }
-    ],
-]
 
 var player = {
     x: 40,
@@ -121,6 +18,7 @@ var player = {
     jumping: false,
     grounded: false
 };
+
 var friction = 0.8;
 var gravity = 0.3;
 
@@ -189,7 +87,7 @@ function game() {
 
 function update() {
 
-    if(keys[38]){
+    if(keys[38] || keys[32]){
       if(!player.jumping){
         player.jumping = true;
         player.grounded = false;
@@ -226,11 +124,13 @@ function update() {
       player.y = height - player.height;
       player.jumping = false;
 
-      if(player.y <= height){
-        //respawns the player at the top
-        player.y = 0;
+      if(player.y < height + player.y){
+        alert("U DED MAFAKKA, AIN'T NO SECOND CHANCES HERE M8!");
+        // Add function to kill game
+        player.x = 40;
+        player.y = 40;
       }
-    }    
+    }
 
     if(player.y < 0) player.y = 0;
 
@@ -289,9 +189,7 @@ function collision(first, second) {
             first.y + first.height < second.y);
 }
 
-//executes the game func
-//var startGame = window.setInterval(game, 1000/60);
-
+// Replace this with animationframe
 setInterval(function () {
     game();
 }, 1000/60)
