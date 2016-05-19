@@ -1,3 +1,12 @@
+body {
+    background: #333;
+}
+
+.container {
+    width: 1000px;
+    margin: 0 auto;
+}
+
 #game-menu{
   display: block;
   text-align: center;
