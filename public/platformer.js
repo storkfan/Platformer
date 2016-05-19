@@ -7,6 +7,8 @@ var width = 1024, height = 640, speed = 4;
 
 var score = 0;
 
+//var fps = 60; //no need for it atm, only used when setTimeout on game() func.
+
 var player = {
     x: 40,
     y: 40,
@@ -28,6 +30,8 @@ var cube = {
     width: 20,
     height: 20
 };
+
+game(); //inits the function
 
 window.addEventListener('keydown', function(e) {
     keys[e.keyCode] = true;
@@ -81,9 +85,19 @@ function colCheck(shapeA, shapeB) {
 }
 
 function game() {
+  requestAnimationFrame(game);
+  update();
+  render();
+}
+
+//works as the code above just that you can set fps*
+/*function game() {
+  setTimeout(function() {
+    requestAnimationFrame(game);
     update();
     render();
-}
+  }, 1000 / fps);
+}*/
 
 function update() {
 
@@ -190,6 +204,32 @@ function collision(first, second) {
 }
 
 // Replace this with animationframe
-setInterval(function () {
+/*setInterval(function () {
     game();
-}, 1000/60)
+}, 1000/60)*/
+
+//animationFrame - http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/
+(function() {
+    var lastTime = 0;
+    var vendors = ['ms', 'moz', 'webkit', 'o'];
+    for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+        window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+        window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame']
+                                   || window[vendors[x]+'CancelRequestAnimationFrame'];
+    }
+ 
+    if (!window.requestAnimationFrame)
+        window.requestAnimationFrame = function(callback, element) {
+            var currTime = new Date().getTime();
+            var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+            var id = window.setTimeout(function() { callback(currTime + timeToCall); },
+              timeToCall);
+            lastTime = currTime + timeToCall;
+            return id;
+        };
+ 
+    if (!window.cancelAnimationFrame)
+        window.cancelAnimationFrame = function(id) {
+            clearTimeout(id);
+        };
+}());
