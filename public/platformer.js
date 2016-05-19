@@ -15,7 +15,7 @@ var context = document.getElementById('canvas').getContext('2d');
 
 var keys = [];
 
-var width = 1000, height = 700, speed = 4;
+var width = 1024, height = 640, speed = 4;
 
 var score = 0;
 

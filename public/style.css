@@ -3,7 +3,7 @@ body {
 }
 
 .container {
-    width: 1000px;
+    width: 1024px;
     margin: 0 auto;
 }
 
@@ -13,8 +13,8 @@ body {
   font-family: 'Press Start 2P', cursive;
   background-image: url('city.png');
   background-size: cover;
-  height: 700px;
-  width: 1000px;
+  height: 640px;
+  width: 1024px;
 }
 #game-menu>h2{
   font-size: 48px;
