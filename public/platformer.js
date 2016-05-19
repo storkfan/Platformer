@@ -1,9 +1,21 @@
 var canvas = document.getElementById('canvas');
 var context = document.getElementById('canvas').getContext('2d');
 
+// GAME MENU
+// var gameMenu = document.getElementById('game-menu');
+// document.getElementById('play').addEventListener('click', hideMenu);
+//
+// function hideMenu() {
+//   if(gameMenu.style.display === "block"){
+//     gameMenu.style.display = "none";
+//     game();
+//   }
+// }
+// GAME MENU END
+
 var keys = [];
 
-var width = 1000, height = 700, speed = 4;
+var width = 1024, height = 640, speed = 4;
 
 var score = 0;
 

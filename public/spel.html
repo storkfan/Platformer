@@ -2,15 +2,20 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
-    <style>
-      canvas{
-        background-color: gray;
-      }
-    </style>
+    <title>NSA Runaway</title>
+    <link href='https://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
-     <canvas id="canvas" width="1000" height="700"></canvas>
+    <div class="container">
+        <div id="game-menu">
+          <h1 id="game-title">NSA RUNAWAY</h1>
+          <h2><a id="play">PLAY</a></h2>
+          <h2>OPTIONS</h2>
+          <h2>HIGHSCORES</h2>
+        </div>
+        <canvas id="canvas" width="1024" height="640"></canvas>
+     </div>
     <script src="platformer.js"></script>
   </body>
 </html>
