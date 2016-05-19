@@ -2,15 +2,18 @@ var canvas = document.getElementById('canvas');
 var context = document.getElementById('canvas').getContext('2d');
 
 // GAME MENU
-/* var gameMenu = document.getElementById('game-menu');
+ var gameMenu = document.getElementById('game-menu');
  document.getElementById('play').addEventListener('click', hideMenu);
-
+ /*
  function hideMenu() {
    if(gameMenu.style.display === "block"){
      gameMenu.style.display = "none";
      game();
    }
  }*/
+ function hideMenu(){
+  gameMenu.style.display = "none"; //tempo solution to get rid of game-menu
+ }
 // GAME MENU END
 
 var keys = [];
@@ -258,11 +261,6 @@ function render() {
 
     if(player.grounded){
         player.velY = 0;
-    }
-
-    if(player.y === 100){
-      context.font = "30px Arial";
-      context.fillText("GAME OVER", 330, 500);
     }
 
     context.fillStyle = 'orange';
