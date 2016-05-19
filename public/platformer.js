@@ -1,48 +1,63 @@
 var canvas = document.getElementById('canvas');
 var context = document.getElementById('canvas').getContext('2d');
 
-console.log(context);
-
 var keys = [];
 
 var width = 500, height = 400, speed = 4;
 
 var score = 0;
 
-var map = [
-          {x: 40,
-          y: 60},
+var currentMap = 0;
+var map = [];
+var currentMapStage = 0;
+var stage1 = [];
+var stage2 = [];
+var stage2 = [];
 
-          {x: 100,
-          y: 150},
-
-          {x: 120,
-          y: 235},
-
-          {x: 432,
-          y: 89}
-          ];
-
-var mapStage = 0;
-
-console.log(map.length);
-console.log(mapStage);
-
-var boxes = [
-    {
-    x: 120,
-    y: 300,
-    width: 80,
-    height: 80
-    },
-
-    {
-    x: 250,
-    y: 250,
-    width: 40,
-    height: 40
-    }
-];
+map = [
+    stage1 = [
+        {
+            x: 120,
+            y: 300,
+            width: 80,
+            height: 80
+        },
+        {
+            x: 250,
+            y: 250,
+            width: 40,
+            height: 40
+        }
+    ],
+    stage2 = [
+        {
+            x: 120,
+            y: 250,
+            width: 40,
+            height: 40
+        },
+        {
+            x: 300,
+            y: 350,
+            width: 40,
+            height: 40
+        }
+    ],
+    stage3 = [
+        {
+            x: 250,
+            y: 100,
+            width: 40,
+            height: 40
+        },
+        {
+            x: 400,
+            y: 350,
+            width: 40,
+            height: 40
+        }
+    ],
+]
 
 var player = {
     x: 40,
@@ -133,34 +148,27 @@ function update() {
     player.x += player.velX;
     player.y += player.velY;
 
-    if(player.x < 0) {
-       player.x = width;
-       mapStage--;
-       map[mapStage];
-       cube.x = map[mapStage].x;
-       cube.y = map[mapStage].y;
 
-       if(mapStage < 0){
-         mapStage = 0;
-         player.x = 0;
-       }
+    if (currentMapStage == 0 && player.x <= 0) {
+        player.x = 0;
+    } else if (player.x == 0 && currentMapStage !== 0) {
+       currentMapStage--;
+       player.x = width - player.width;
     }
 
-    if(player.y < 0) player.y = 0;
-
     if(player.x >= width + player.width) {
-        mapStage++;
+        currentMapStage++;
         player.x = 0 + player.width;
-        cube.x = map[mapStage].x;
-        cube.y = map[mapStage].y;
-      } else if (player.x >= width - player.width && mapStage == map.length -1) {
+    } else if (player.x >= width - player.width && currentMapStage == map[currentMapStage].length) {
         player.x = width - player.width;
-        }
+    }
 
     if(player.y >= height - player.height){
       player.y = height - player.height;
       player.jumping = false;
     }
+
+    if(player.y < 0) player.y = 0;
 
     if(collision(player, cube)) process();
 }
@@ -171,9 +179,10 @@ function render() {
     context.fillStyle = "black";
     context.beginPath();
     player.grounded = false;
-    for (var i = 0; i < boxes.length; i++) {
-      context.fillRect(boxes[i].x, boxes[i].y, boxes[i].width, boxes[i].height);
-      var dir = colCheck(player, boxes[i]);
+    for (var i = 0; i < map[currentMapStage].length; i++) {
+      context.fillRect(map[currentMapStage][i].x, map[currentMapStage][i].y, map[currentMapStage][i].width, map[currentMapStage][i].height);
+
+      var dir = colCheck(player, map[currentMapStage][i]);
 
       if (dir === "l" || dir === "r") {
           player.velX = 0;
