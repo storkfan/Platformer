@@ -15,7 +15,7 @@ var context = document.getElementById('canvas').getContext('2d');
 
 var keys = [];
 
-var width = 500, height = 400, speed = 4;
+var width = 1000, height = 700, speed = 4;
 
 var score = 0;
 
@@ -29,19 +29,37 @@ var stage2 = [];
 map = [
     stage1 = [
         {
-            x: 120,
+            x: 40,
             y: 300,
-            width: 80,
-            height: 80
+            width: 250,
+            height: 30
         },
         {
-            x: 250,
-            y: 250,
-            width: 40,
+            x: 400,
+            y: 325,
+            width: 100,
+            height: 40
+        },
+        {
+            x: 650,
+            y: 275,
+            width: 100,
+            height: 40
+        },
+        {
+            x: 900,
+            y: 275,
+            width: 100,
             height: 40
         }
     ],
     stage2 = [
+        {
+            x: 0,
+            y: 275,
+            width: 100,
+            height: 40
+        },
         {
             x: 120,
             y: 250,
@@ -53,19 +71,37 @@ map = [
             y: 350,
             width: 40,
             height: 40
-        }
-    ],
-    stage3 = [
+        },
         {
-            x: 250,
-            y: 100,
+            x: 450,
+            y: 450,
             width: 40,
             height: 40
         },
         {
+            x: 625,
+            y: 400,
+            width: 350,
+            height: 40
+        }
+    ],
+    stage3 = [
+        {
+            x: 0,
+            y: 500,
+            width: 300,
+            height: 40
+        },
+        {
+            x: 375,
+            y: 400,
+            width: 50,
+            height: 40
+        },
+        {
             x: 400,
-            y: 350,
-            width: 40,
+            y: 300,
+            width: 500,
             height: 40
         }
     ],
@@ -98,6 +134,14 @@ window.addEventListener('keydown', function(e) {
 
 window.addEventListener('keyup', function(e) {
     delete keys[e.keyCode];
+}, false);
+
+//disables the default behavior of keys
+window.addEventListener("keydown", function(e) {
+    // space and arrow keys
+    if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+        e.preventDefault();
+    }
 }, false);
 
 function colCheck(shapeA, shapeB) {
@@ -227,7 +271,7 @@ function render() {
 function process() {
     score++;
     cube.x = Math.random() * (width - 20);
-    cube.y = height - 20;
+    cube.y = 200;
 }
 
 function collision(first, second) {
