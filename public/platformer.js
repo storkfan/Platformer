@@ -9,12 +9,42 @@ var width = 500, height = 400, speed = 4;
 
 var score = 0;
 
-var map = ["mapStage1",
-           "mapStage2",
-           "mapStage3"
+var map = [
+          {x: 40,
+          y: 60},
+
+          {x: 100,
+          y: 150},
+
+          {x: 120,
+          y: 235},
+
+          {x: 432,
+          y: 89}
           ];
 
 var mapStage = 0;
+
+console.log(map.length);
+console.log(mapStage);
+
+var boxes = [];
+
+boxes.push({
+    x: 120,
+    y: 10,
+    width: 80,
+    height: 80
+});
+
+boxes.push({
+    x: 200,
+    y: 150,
+    width: 40,
+    height: 40
+});
+
+console.log(boxes);
 
 var player = {
     x: 40,
@@ -30,8 +60,8 @@ var friction = 0.8;
 var gravity = 0.3;
 
 var cube = {
-    x: Math.random() * (width - 20),
-    y: Math.random() * (height - 20),
+    x: 100,
+    y: 100,
     width: 20,
     height: 20
 };
@@ -50,6 +80,15 @@ function game() {
 }
 
 function update() {
+
+    context.clearRect(0, 0, width, height);
+    context.fillStyle = "black";
+    context.beginPath();
+
+    for (var i = 0; i < boxes.length; i++) {
+      context.rect(boxes[i].x, boxes[i].y, boxes[i].width, boxes[i].height);
+    }
+
     if(keys[38]){
       if(!player.jumping){
         player.jumping = true;
@@ -65,19 +104,29 @@ function update() {
     player.x += player.velX;
     player.y += player.velY;
 
-    if(player.x < 0)  {
-      player.x = width;
-      mapStage--;
-      map[mapStage];
-    };
+    if(player.x < 0) {
+       player.x = width;
+       mapStage--;
+       map[mapStage];
+       cube.x = map[mapStage].x;
+       cube.y = map[mapStage].y;
+
+       if(mapStage < 0){
+         mapStage = 0;
+         player.x = 0;
+       }
+    }
 
     if(player.y < 0) player.y = 0;
 
     if(player.x >= width + player.width) {
-      player.x = 0 + player.width;
-      mapStage++;
-      map[mapStage];
-    };
+        mapStage++;
+        player.x = 0 + player.width;
+        cube.x = map[mapStage].x;
+        cube.y = map[mapStage].y;
+      } else if (player.x >= width - player.width && mapStage == map.length -1) {
+        player.x = width - player.width;
+        }
 
     if(player.y >= height - player.height){
       player.y = height - player.height;
@@ -99,10 +148,6 @@ function render() {
     context.fillStyle = 'black';
     context.font = 'bold 30px helvetica';
     context.fillText(score, 10, 30);
-
-    context.fillStyle = 'black';
-    context.font = 'bold 30px helvetica';
-    context.fillText(map[mapStage], 60, 30);
 
     context.fillStyle = 'black';
     context.font = 'bold 30px helvetica';
