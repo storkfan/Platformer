@@ -28,23 +28,21 @@ var mapStage = 0;
 console.log(map.length);
 console.log(mapStage);
 
-var boxes = [];
-
-boxes.push({
+var boxes = [
+    {
     x: 120,
-    y: 10,
+    y: 300,
     width: 80,
     height: 80
-});
+    },
 
-boxes.push({
-    x: 200,
-    y: 150,
+    {
+    x: 250,
+    y: 250,
     width: 40,
     height: 40
-});
-
-console.log(boxes);
+    }
+];
 
 var player = {
     x: 40,
@@ -54,14 +52,15 @@ var player = {
     speed: 3,
     velX: 0,
     velY: 0,
-    jumping: false
+    jumping: false,
+    grounded: false
 };
 var friction = 0.8;
 var gravity = 0.3;
 
 var cube = {
     x: 100,
-    y: 100,
+    y: 300,
     width: 20,
     height: 20
 };
@@ -74,6 +73,41 @@ window.addEventListener('keyup', function(e) {
     delete keys[e.keyCode];
 }, false);
 
+function colCheck(shapeA, shapeB) {
+    // get the vectors to check against
+    var vX = (shapeA.x + (shapeA.width / 2)) - (shapeB.x + (shapeB.width / 2)),
+        vY = (shapeA.y + (shapeA.height / 2)) - (shapeB.y + (shapeB.height / 2)),
+        // add the half widths and half heights of the objects
+        hWidths = (shapeA.width / 2) + (shapeB.width / 2),
+        hHeights = (shapeA.height / 2) + (shapeB.height / 2),
+        colDir = null;
+
+    // if the x and y vector are less than the half width or half height, they we must be inside the object, causing a collision
+    if (Math.abs(vX) < hWidths && Math.abs(vY) < hHeights) {
+        // figures out on which side we are colliding (top, bottom, left, or right)
+        var oX = hWidths - Math.abs(vX),
+            oY = hHeights - Math.abs(vY);
+        if (oX >= oY) {
+            if (vY > 0) {
+                colDir = "t";
+                shapeA.y += oY;
+            } else {
+                colDir = "b";
+                shapeA.y -= oY;
+            }
+        } else {
+            if (vX > 0) {
+                colDir = "l";
+                shapeA.x += oX;
+            } else {
+                colDir = "r";
+                shapeA.x -= oX;
+            }
+        }
+    }
+    return colDir;
+}
+
 function game() {
     update();
     render();
@@ -81,26 +115,21 @@ function game() {
 
 function update() {
 
-    context.clearRect(0, 0, width, height);
-    context.fillStyle = "black";
-    context.beginPath();
-
-    for (var i = 0; i < boxes.length; i++) {
-      context.rect(boxes[i].x, boxes[i].y, boxes[i].width, boxes[i].height);
-    }
-
     if(keys[38]){
       if(!player.jumping){
         player.jumping = true;
+        player.grounded = false;
         player.velY = -player.speed*2;
       }
     }
+
     // if(keys[40]) player.y+=speed;
     if(keys[37]) player.x-=speed;
     if(keys[39]) player.x+=speed;
 
     player.velX *= friction;
     player.velY += gravity;
+
     player.x += player.velX;
     player.y += player.velY;
 
@@ -136,10 +165,31 @@ function update() {
     if(collision(player, cube)) process();
 }
 
-
-
 function render() {
     context.clearRect(0, 0, width, height);
+
+    context.fillStyle = "black";
+    context.beginPath();
+    player.grounded = false;
+    for (var i = 0; i < boxes.length; i++) {
+      context.fillRect(boxes[i].x, boxes[i].y, boxes[i].width, boxes[i].height);
+      var dir = colCheck(player, boxes[i]);
+
+      if (dir === "l" || dir === "r") {
+          player.velX = 0;
+          player.jumping = false;
+      } else if (dir === "b") {
+          player.grounded = true;
+          player.jumping = false;
+      } else if (dir === "t") {
+          player.velY *= -1;
+      }
+    }
+
+    if(player.grounded){
+        player.velY = 0;
+    }
+
     context.fillStyle = 'orange';
     context.fillRect(player.x, player.y, player.width, player.height);
     context.fillStyle = 'blue';
@@ -156,7 +206,7 @@ function render() {
 function process() {
     score++;
     cube.x = Math.random() * (width - 20);
-    cube.y = Math.random() * (height - 20);
+    cube.y = height - 20;
 }
 
 function collision(first, second) {
