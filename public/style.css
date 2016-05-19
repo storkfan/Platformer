@@ -1,0 +1,28 @@
+#game-menu{
+  display: block;
+  text-align: center;
+  font-family: 'Press Start 2P', cursive;
+  background-image: url('city.png');
+  background-size: cover;
+  height: 400px;
+  width: 500px;
+}
+#game-menu>h2{
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+}
+#game-menu>h2:hover{
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+  color: #e92fd7;
+  cursor: pointer;
+}
+#game-title{
+  padding-top: 100px;
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+  color: #e92fd7;
+}
+#play{
+  padding-top: 50px;
+}
+canvas{
+  background-color: gray;
+}

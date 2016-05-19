@@ -1,6 +1,18 @@
 var canvas = document.getElementById('canvas');
 var context = document.getElementById('canvas').getContext('2d');
 
+// GAME MENU
+// var gameMenu = document.getElementById('game-menu');
+// document.getElementById('play').addEventListener('click', hideMenu);
+//
+// function hideMenu() {
+//   if(gameMenu.style.display === "block"){
+//     gameMenu.style.display = "none";
+//     game();
+//   }
+// }
+// GAME MENU END
+
 var keys = [];
 
 var width = 500, height = 400, speed = 4;
