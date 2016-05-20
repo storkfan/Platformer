@@ -144,6 +144,7 @@ function update() {
         // alert("U DED MAFAKKA, AIN'T NO SECOND CHANCES HERE M8!");
         gameOverMenu.style.display = "block";
         // Add function to kill game
+        currentMapStage = 0;
         player.x = 40;
         player.y = 40;
       }
