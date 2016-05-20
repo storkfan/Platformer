@@ -133,7 +133,7 @@ function update() {
     if(player.x >= width + player.width) {
         currentMapStage++;
         player.x = 0 + player.width;
-    } else if (player.x >= width - player.width && currentMapStage == map[currentMapStage].length) {
+    } else if (player.x >= width - player.width && currentMapStage == map[currentMapStage].length -1) {
         player.x = width - player.width;
     }
 
