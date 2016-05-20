@@ -28,7 +28,6 @@ for (i = 0; i < x.length; i++) {
    gameScores.style.display = "none";
    gameOver.style.display = "none";
    gameMenu.style.display = "block";
-   console.log('rekt');
  }
 
 
