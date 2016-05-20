@@ -45,7 +45,7 @@ body {
 #game-menu>h2, #game-over>h2, #game-options>h2, #game-scores>h2{
   font-size: 48px;
 }
-#game-options>p, #game-scores>p, #game-menu>h2:hover, #game-over>h2:hover, #game-options>h2:hover{
+.back-to-menu, #game-menu>h2:hover, #game-over>h2:hover, #game-options>h2:hover{
   color: #e92fd7;
   cursor: pointer;
 }

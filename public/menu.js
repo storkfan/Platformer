@@ -26,6 +26,7 @@ for (i = 0; i < x.length; i++) {
  function backToMenu() {
    gameOptions.style.display = "none";
    gameScores.style.display = "none";
+   gameOver.style.display = "none";
    gameMenu.style.display = "block";
    console.log('rekt');
  }
