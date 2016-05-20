@@ -99,6 +99,9 @@ function game() {
   }, 1000 / fps);
 }*/
 
+// TEMPORÄR LÖSNING FÖR GAME OVER MENYN
+var gameOverMenu = document.getElementById('game-over');
+
 function update() {
 
     if(keys[38] || keys[32]){
@@ -139,7 +142,8 @@ function update() {
       player.jumping = false;
 
       if(player.y < height + player.y){
-        alert("U DED MAFAKKA, AIN'T NO SECOND CHANCES HERE M8!");
+        // alert("U DED MAFAKKA, AIN'T NO SECOND CHANCES HERE M8!");
+        gameOverMenu.style.display = "block";
         // Add function to kill game
         player.x = 40;
         player.y = 40;
@@ -217,7 +221,7 @@ function collision(first, second) {
         window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame']
                                    || window[vendors[x]+'CancelRequestAnimationFrame'];
     }
- 
+
     if (!window.requestAnimationFrame)
         window.requestAnimationFrame = function(callback, element) {
             var currTime = new Date().getTime();
@@ -227,7 +231,7 @@ function collision(first, second) {
             lastTime = currTime + timeToCall;
             return id;
         };
- 
+
     if (!window.cancelAnimationFrame)
         window.cancelAnimationFrame = function(id) {
             clearTimeout(id);
