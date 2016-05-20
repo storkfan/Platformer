@@ -7,6 +7,17 @@ var width = 1024, height = 640, speed = 4;
 
 var score = 0;
 
+var sec = 0;
+
+// Not fully functional yet, neets to be reset and not started until player actively starts next game
+function pad(val) {
+    return val > 9 ? val : "0" + val;
+}
+var timer = setInterval(function () {
+    var seconds = pad(++sec % 60);
+    var minutes = pad(parseInt(sec / 60, 10));
+}, 1000);
+
 //var fps = 60; //no need for it atm, only used when setTimeout on game() func.
 
 var player = {
@@ -124,7 +135,7 @@ function update() {
 
     if (currentMapStage === 0 && player.x <= 0) {
         player.x = 0;
-    } else if (player.x == 0 && currentMapStage !== 0) {
+    } else if (player.x === 0 && currentMapStage !== 0) {
        currentMapStage--;
        player.x = width - player.width;
     }
@@ -145,6 +156,8 @@ function update() {
         gameOverMenu.style.display = "block";
         // Add function to kill game
         currentMapStage = 0;
+        score = 0;
+        sec = 0;
         player.x = 40;
         player.y = 40;
       }
@@ -187,11 +200,12 @@ function render() {
     context.fillRect(cube.x, cube.y, cube.width, cube.height);
 
     context.fillStyle = 'black';
-    context.font = 'bold 30px helvetica';
-    context.fillText(score, 10, 30);
+    context.font = 'bold 20px helvetica';
+    context.fillText("Score: " + score, 10, 30);
 
     context.fillStyle = 'black';
-    context.font = 'bold 30px helvetica';
+    context.font = 'bold 20px helvetica';
+    context.fillText("Time: " + sec, 910, 30);
   }
 
 function process() {
