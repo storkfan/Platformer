@@ -200,12 +200,12 @@ function render() {
     context.fillRect(cube.x, cube.y, cube.width, cube.height);
 
     context.fillStyle = 'black';
-    context.font = 'bold 30px helvetica';
-    context.fillText(score, 10, 30);
+    context.font = 'bold 20px helvetica';
+    context.fillText("Score: " + score, 10, 30);
 
     context.fillStyle = 'black';
-    context.font = 'bold 30px helvetica';
-    context.fillText("Time: " + sec, 880, 30);
+    context.font = 'bold 20px helvetica';
+    context.fillText("Time: " + sec, 910, 30);
   }
 
 function process() {
