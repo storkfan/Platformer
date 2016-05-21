@@ -2,6 +2,11 @@ body {
     background: #333;
 }
 
+canvas {
+  background-image: url('city.png');
+  background-size: cover;
+}
+
 .container {
     width: 1024px;
     margin: 0 auto;
