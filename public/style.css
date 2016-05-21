@@ -11,7 +11,10 @@ canvas {
     width: 1024px;
     margin: 0 auto;
 }
-
+* {
+  font-family: 'Press Start 2P', cursive;
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+}
 #game-menu{
   position: absolute;
   display: block;
@@ -22,19 +25,9 @@ canvas {
   height: 640px;
   width: 1024px;
 }
-#game-menu>h2{
-  font-size: 48px;
-  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-}
-#game-menu>h2:hover{
-  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-  color: #e92fd7;
-  cursor: pointer;
-}
 #game-title{
   font-size: 64px;
   padding-top: 150px;
-  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
   color: #e92fd7;
 }
 #play{
@@ -52,25 +45,15 @@ canvas {
 #game-over>h1, #game-options>h1, #game-scores>h1{
   font-size: 64px;
   padding-top: 150px;
-  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
   color: #e92fd7;
 }
-#game-over>h2, #game-options>h2, #game-scores>h2{
+#game-menu>h2, #game-over>h2, #game-options>h2, #game-scores>h2{
   font-size: 48px;
-  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 }
-#game-over>h2:hover, #game-options>h2:hover{
+.back-to-menu, #game-menu>h2:hover, #game-over>h2:hover, #game-options>h2:hover{
   color: #e92fd7;
   cursor: pointer;
 }
-
-#game-options p, #game-scores p {
-  font-family: 'Press Start 2P', cursive;
-  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-  color: #e92fd7;
-  cursor: pointer;
-}
-
 canvas{
   background-color: gray;
 }
