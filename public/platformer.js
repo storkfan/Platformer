@@ -1,6 +1,9 @@
 var canvas = document.getElementById('canvas');
 var context = document.getElementById('canvas').getContext('2d');
 
+// TODO: fix better solution for this
+var gameOverMenu = document.getElementById('game-over');
+
 var keys = [];
 
 var width = 1024, height = 640, speed = 4;
@@ -9,7 +12,7 @@ var score = 0;
 
 var sec = 0;
 
-// Not fully functional yet, neets to be reset and not started until player actively starts next game
+// TODO: Not fully functional yet, neets to be reset and not started until player actively starts next game
 function pad(val) {
     return val > 9 ? val : "0" + val;
 }
@@ -41,8 +44,6 @@ var cube = {
     width: 20,
     height: 20
 };
-
-game(); //inits the function
 
 window.addEventListener('keydown', function(e) {
     keys[e.keyCode] = true;
@@ -95,23 +96,11 @@ function colCheck(shapeA, shapeB) {
     return colDir;
 }
 
-function game() {
-  requestAnimationFrame(game);
+function initGame() {
+  requestAnimationFrame(initGame);
   update();
   render();
 }
-
-//works as the code above just that you can set fps*
-/*function game() {
-  setTimeout(function() {
-    requestAnimationFrame(game);
-    update();
-    render();
-  }, 1000 / fps);
-}*/
-
-// TEMPORÄR LÖSNING FÖR GAME OVER MENYN
-var gameOverMenu = document.getElementById('game-over');
 
 function update() {
 
@@ -154,7 +143,7 @@ function update() {
       if(player.y < height + player.y){
         // alert("U DED MAFAKKA, AIN'T NO SECOND CHANCES HERE M8!");
         gameOverMenu.style.display = "block";
-        // Add function to kill game
+        saveScore();
         currentMapStage = 0;
         score = 0;
         sec = 0;
@@ -220,6 +209,15 @@ function collision(first, second) {
             first.y  > second.y + second.height ||
             first.y + first.height < second.y);
 }
+
+function saveScore(){
+  document.cookie = score;
+  console.log(document.cookie);
+}
+
+// function deleteCookie(){
+//   document.cookie = score + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+// }
 
 // Replace this with animationframe
 /*setInterval(function () {
