@@ -143,7 +143,7 @@ function update() {
       if(player.y < height + player.y){
         // alert("U DED MAFAKKA, AIN'T NO SECOND CHANCES HERE M8!");
         gameOverMenu.style.display = "block";
-        saveScore();
+        //saveScore();
         currentMapStage = 0;
         score = 0;
         sec = 0;
@@ -210,10 +210,10 @@ function collision(first, second) {
             first.y + first.height < second.y);
 }
 
-function saveScore(){
-  document.cookie = score;
-  console.log(document.cookie);
-}
+// function saveScore(){
+//   document.cookie = score;
+//   console.log(document.cookie);
+// }
 
 // function deleteCookie(){
 //   document.cookie = score + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
