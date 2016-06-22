@@ -134,6 +134,8 @@ function update() {
         player.x = 0 + player.width;
     } else if (player.x >= width - player.width && currentMapStage == map[currentMapStage].length -1) {
         player.x = width - player.width;
+        gameComplete.style.display = "block";
+        points.innerHTML = "Your score: " + score;
     }
 
     if(player.y >= height - player.height){
@@ -200,7 +202,7 @@ function render() {
 function process() {
     score++;
     cube.x = Math.random() * (width - 20);
-    cube.y = 200;
+    cube.y = 250;
 }
 
 function collision(first, second) {

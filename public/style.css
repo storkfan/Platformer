@@ -33,7 +33,7 @@ canvas {
 #play{
   padding-top: 50px;
 }
-#game-over, #game-options, #game-scores{
+#game-over, #game-options, #game-scores, #game-complete{
   position: absolute;
   display: none;
   text-align: center;
@@ -42,18 +42,22 @@ canvas {
   height: 640px;
   width: 1024px;
 }
-#game-over>h1, #game-options>h1, #game-scores>h1{
+#game-over>h1, #game-options>h1, #game-scores>h1, #game-complete>h1{
   font-size: 64px;
   padding-top: 150px;
   color: #e92fd7;
 }
-#game-menu>h2, #game-over>h2, #game-options>h2, #game-scores>h2{
+#game-menu>h2, #game-over>h2, #game-options>h2, #game-scores>h2, #game-complete>h2{
   font-size: 48px;
 }
-.back-to-menu, #game-menu>h2:hover, #game-over>h2:hover, #game-options>h2:hover{
+.back-to-menu, #game-menu>h2:hover, #game-over>h2:hover, #game-options>h2:hover, #game-complete>h2:hover{
   color: #e92fd7;
   cursor: pointer;
 }
 canvas{
   background-color: gray;
+}
+
+#points {
+  text-decoration: underline;
 }
